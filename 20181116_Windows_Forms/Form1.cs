@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
+using System.Net;
 
 namespace _20181116_Windows_Forms
 {
@@ -75,9 +77,24 @@ namespace _20181116_Windows_Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            MessageBox.Show($"Wpisane imie to: {textBox_Name.Text}");
-           
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com",587);
+
+            client.Credentials = new NetworkCredential()
+            {
+                UserName = "balluffkurs@gmail.com",
+                Password = "balluff123"
+            };
+
+            client.EnableSsl = true;
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("balluffkurs@gmail.com", "Balluff Kurs Programowania");
+            message.To.Add(new MailAddress("marcin.cukrowski@gmail.com", "Marcin"));
+            message.Subject = "Kurs C# - wysyłanie e-mail";
+            message.Body = "Hello World";
+
+            client.Send(message);
         }
 
         private void button_choose_folder_Click(object sender, EventArgs e)
