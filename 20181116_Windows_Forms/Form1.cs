@@ -34,7 +34,27 @@ namespace _20181116_Windows_Forms
 
         private void _watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            MessageBox.Show($"Zmiana w folderze {folderBrowserDialog1.SelectedPath}");
+            
+
+            switch (e.ChangeType)
+            {
+                case WatcherChangeTypes.Created:
+                    MessageBox.Show($"Stworzono w folderze: {textBox_Path.Text}");
+                    break;
+                case WatcherChangeTypes.Deleted:
+                    MessageBox.Show($"Skasowano w folderze: {textBox_Path.Text}");
+                    break;
+                case WatcherChangeTypes.Changed:
+                    MessageBox.Show($"Zmiana w folderze: {textBox_Path.Text}");
+                    break;
+                case WatcherChangeTypes.Renamed:
+                    MessageBox.Show($"Zmieniono nazwę w folderze: {textBox_Path.Text}");
+                    break;
+                case WatcherChangeTypes.All:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
