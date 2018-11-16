@@ -33,16 +33,17 @@
             this.textBox_Name = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button_choose_folder = new System.Windows.Forms.Button();
-            this.textBox_Path = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button_togglemonitor = new System.Windows.Forms.Button();
+            this.listBox_Logs = new System.Windows.Forms.ListBox();
+            this.textBox_Path = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(71, 325);
+            this.button1.Location = new System.Drawing.Point(24, 381);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 79);
+            this.button1.Size = new System.Drawing.Size(82, 42);
             this.button1.TabIndex = 0;
             this.button1.Text = "Wyslij mail";
             this.button1.UseVisualStyleBackColor = true;
@@ -74,13 +75,6 @@
             this.button_choose_folder.UseVisualStyleBackColor = true;
             this.button_choose_folder.Click += new System.EventHandler(this.button_choose_folder_Click);
             // 
-            // textBox_Path
-            // 
-            this.textBox_Path.Location = new System.Drawing.Point(75, 23);
-            this.textBox_Path.Name = "textBox_Path";
-            this.textBox_Path.Size = new System.Drawing.Size(468, 22);
-            this.textBox_Path.TabIndex = 4;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -100,11 +94,30 @@
             this.button_togglemonitor.UseVisualStyleBackColor = true;
             this.button_togglemonitor.Click += new System.EventHandler(this.button2_Click);
             // 
+            // listBox_Logs
+            // 
+            this.listBox_Logs.FormattingEnabled = true;
+            this.listBox_Logs.ItemHeight = 16;
+            this.listBox_Logs.Location = new System.Drawing.Point(369, 102);
+            this.listBox_Logs.Name = "listBox_Logs";
+            this.listBox_Logs.Size = new System.Drawing.Size(331, 244);
+            this.listBox_Logs.TabIndex = 7;
+            // 
+            // textBox_Path
+            // 
+            this.textBox_Path.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::_20181116_Windows_Forms.Properties.Settings.Default, "FolderPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Path.Location = new System.Drawing.Point(75, 23);
+            this.textBox_Path.Name = "textBox_Path";
+            this.textBox_Path.Size = new System.Drawing.Size(468, 22);
+            this.textBox_Path.TabIndex = 4;
+            this.textBox_Path.Text = global::_20181116_Windows_Forms.Properties.Settings.Default.FolderPath;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBox_Logs);
             this.Controls.Add(this.button_togglemonitor);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_Path);
@@ -114,6 +127,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,6 +143,7 @@
         private System.Windows.Forms.TextBox textBox_Path;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_togglemonitor;
+        private System.Windows.Forms.ListBox listBox_Logs;
     }
 }
 

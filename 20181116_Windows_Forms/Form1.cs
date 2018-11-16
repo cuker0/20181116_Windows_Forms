@@ -34,27 +34,43 @@ namespace _20181116_Windows_Forms
 
         private void _watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            
+
+            string log = "";
 
             switch (e.ChangeType)
             {
                 case WatcherChangeTypes.Created:
-                    MessageBox.Show($"Stworzono w folderze: {textBox_Path.Text}");
+             //       MessageBox.Show($"Stworzono w folderze: {textBox_Path.Text}");
+                    log = $"File Created: {e.Name}";
                     break;
                 case WatcherChangeTypes.Deleted:
-                    MessageBox.Show($"Skasowano w folderze: {textBox_Path.Text}");
+                    //MessageBox.Show($"Skasowano w folderze: {textBox_Path.Text}");
+                    log = $"File Deleted: {e.Name}";
                     break;
                 case WatcherChangeTypes.Changed:
-                    MessageBox.Show($"Zmiana w folderze: {textBox_Path.Text}");
+                    //   MessageBox.Show($"Zmiana w folderze: {textBox_Path.Text}");
+                    log = $"File Changed: {e.Name}";
                     break;
                 case WatcherChangeTypes.Renamed:
-                    MessageBox.Show($"Zmieniono nazwę w folderze: {textBox_Path.Text}");
+                    //   MessageBox.Show($"Zmieniono nazwę w folderze: {textBox_Path.Text}");
+                    log = $"File Renamed: {e.Name}";
                     break;
                 case WatcherChangeTypes.All:
                     break;
                 default:
                     break;
             }
+
+            if (InvokeRequired)     // dodanie wyjatku do watku monitorowania folderu
+            {
+                BeginInvoke((Action)(() =>
+                {
+                    listBox_Logs.Items.Insert(0, log);
+
+                }));
+            }
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,6 +111,11 @@ namespace _20181116_Windows_Forms
             }
 
             _watcher.EnableRaisingEvents = !_watcher.EnableRaisingEvents; //negacja stanu po kliknieciu przycisku
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Save();  //zapisanie zmian do zamykaniu okna
         }
     }
 }
